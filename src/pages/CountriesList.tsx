@@ -14,7 +14,8 @@ import {
   Typography,
   Pagination,
   Stack,
-  Button
+  Button,
+  Container
 } from '@mui/material';
 import { FaPersonArrowUpFromLine, FaPersonArrowDownToLine } from "react-icons/fa6";
 import { useCountriesStore } from '../store/useCountriesStore';
@@ -63,75 +64,78 @@ export const CountriesList: React.FC = () => {
   const totalPages = getTotalPages();
 
   return (
-    <Box>
-      <Box sx={{ mb: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-        <TextField
-          label="Buscar país"
-          variant="outlined"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          sx={{ minWidth: 200, flex: 1 }}
-        />
-        
-        <FormControl sx={{ minWidth: 200 }}>
-          <InputLabel>Region</InputLabel>
-          <Select
-            value={selectedRegion}
-            label="Region"
-            onChange={(e) => setSelectedRegion(e.target.value)}
-          >
-            <MenuItem value="">Todas</MenuItem>
-            <MenuItem value="Africa">África</MenuItem>
-            <MenuItem value="Americas">América</MenuItem>
-            <MenuItem value="Asia">Asia</MenuItem>
-            <MenuItem value="Europe">Europa</MenuItem>
-            <MenuItem value="Oceania">Oceanía</MenuItem>
-          </Select>
-        </FormControl>
-
-        <ToggleButtonGroup
-          value={sortOrder}
-          exclusive
-          onChange={(_, value) => setSortOrder(value)}
-          aria-label="population sort"
-        >
-          <ToggleButton value="asc" aria-label="sort ascending">
-            <FaPersonArrowUpFromLine  size={20} />
-            <Typography sx={{ ml: 1 }}>Mayor población</Typography>
-          </ToggleButton>
-          <ToggleButton value="desc" aria-label="sort descending">
-            <FaPersonArrowDownToLine size={20} />
-            <Typography sx={{ ml: 1 }}>Menor población</Typography>
-          </ToggleButton>
-        </ToggleButtonGroup>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => setIsModalOpen(true)}
-        >
-          Ver Gráfico de Población
-        </Button>
-      </Box>
-      <Grid container spacing={3}>
-        {paginatedCountries.map((country) => (
-          <Grid item key={country.name.common} xs={12} sm={6} md={4} lg={3}>
-            <CountryCard country={country} />
-          </Grid>
-        ))}
-      </Grid>
-
-      {totalPages > 1 && (
-        <Stack spacing={2} alignItems="center" sx={{ mt: 4 }}>
-          <Pagination 
-            count={totalPages} 
-            page={currentPage + 1} 
-            onChange={handlePageChange}
-            color="primary"
-            size="large"
+    <Container fixed>
+      <Box>
+        <Box sx={{ mb: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+          <TextField
+            label="Search countries"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            sx={{ minWidth: 200, flex: 1 }}
           />
-        </Stack>
-      )}
-      <ChartModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </Box>
+          
+          <FormControl sx={{ minWidth: 200 }}>
+            <InputLabel>Region</InputLabel>
+            <Select
+              value={selectedRegion}
+              label="Region"
+              onChange={(e) => setSelectedRegion(e.target.value)}
+            >
+              <MenuItem value="">All Regions</MenuItem>
+              <MenuItem value="Africa">Africa</MenuItem>
+              <MenuItem value="Americas">Americas</MenuItem>
+              <MenuItem value="Asia">Asia</MenuItem>
+              <MenuItem value="Europe">Europe</MenuItem>
+              <MenuItem value="Oceania">Oceania</MenuItem>
+            </Select>
+          </FormControl>
+
+          <ToggleButtonGroup
+            value={sortOrder}
+            exclusive
+            onChange={(_, value) => setSortOrder(value)}
+            aria-label="population sort"
+          >
+            <ToggleButton value="asc" aria-label="sort ascending">
+              <FaPersonArrowUpFromLine  size={20} />
+              <Typography sx={{ ml: 1 }}>Population</Typography>
+            </ToggleButton>
+            <ToggleButton value="desc" aria-label="sort descending">
+              <FaPersonArrowDownToLine size={20} />
+              <Typography sx={{ ml: 1 }}>Population</Typography>
+            </ToggleButton>
+          </ToggleButtonGroup>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setIsModalOpen(true)}
+          >
+            See Population Chart
+          </Button>
+        </Box>
+        <Grid container spacing={3}>
+          {paginatedCountries.map((country) => (
+            <Grid item key={country.name.common} xs={12} sm={6} md={4} lg={3}>
+              <CountryCard country={country} />
+            </Grid>
+          ))}
+        </Grid>
+
+        {totalPages > 1 && (
+          <Stack spacing={2} alignItems="center" sx={{ mt: 4 }}>
+            <Pagination 
+              count={totalPages} 
+              page={currentPage + 1} 
+              onChange={handlePageChange}
+              color="primary"
+              size="large"
+            />
+          </Stack>
+        )}
+        <ChartModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </Box>
+    </Container>
+
   );
 };

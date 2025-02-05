@@ -10,10 +10,10 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PopulationChart = () => {
   const data = {
-    labels: ['Asia', 'África', 'Europa', 'América Latina y el Caribe', 'América del Norte', 'Oceanía'],
+    labels: ['Asia', 'Africa', 'EuropE', 'Latin America and the Caribbean', 'North America', 'Oceania'],
     datasets: [
       {
-        label: 'Distribución de la población mundial por continente en 2024',
+        label: 'Distribution of world population by continent in 2024',
         data: [57.05, 17.67, 8.93, 7.9, 7.9, 0.55],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
