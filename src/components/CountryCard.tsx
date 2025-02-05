@@ -1,8 +1,20 @@
 import React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box, List, ListItem, ListItemIcon, ListItemText, Divider } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  useTheme,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Country } from '../types/country';
-import { FaCity,FaGlobe,FaUsers } from 'react-icons/fa6';
+import { FaCity, FaGlobe, FaUsers } from 'react-icons/fa6';
 
 interface CountryCardProps {
   country: Country;
@@ -10,19 +22,25 @@ interface CountryCardProps {
 
 export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+
+
+  const textColor = theme.palette.mode === 'dark' ? '#ffffff' : '#002680';
+  const secondaryTextColor = theme.palette.mode === 'dark' ? '#b0b0b0' : '#757575';
 
   return (
-    <Card 
+    <Card
       onClick={() => navigate(`/country/${country.name.common}`)}
-      sx={{ 
-        cursor: 'pointer', 
+      sx={{
+        cursor: 'pointer',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
+        backgroundColor: theme.palette.background.paper,
         '&:hover': {
           transform: 'scale(1.02)',
-          transition: 'transform 0.2s ease-in-out'
-        }
+          transition: 'transform 0.2s ease-in-out',
+        },
       }}
     >
       <Box sx={{ position: 'relative', paddingTop: '56.25%' /* 16:9 aspect ratio */ }}>
@@ -36,51 +54,57 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
             left: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover'
+            objectFit: 'cover',
           }}
         />
       </Box>
       <CardContent sx={{ flexGrow: 1 }}>
-      <Typography gutterBottom variant="h6" component="div" noWrap sx={{ color: '#002680', fontWeight: 'bold' }}>
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          noWrap
+          sx={{ color: textColor, fontWeight: 'bold' }}
+        >
           {country.name.common}
         </Typography>
-      <List>
-        <ListItem>
-          <ListItemIcon sx={{ color: '#002680' }}>
-            <FaUsers />
-          </ListItemIcon>
-          <ListItemText 
-            primary="Population"
-            secondary={country.population.toLocaleString()}
-            secondaryTypographyProps={{ color: '#757575' }}
-          />
-        </ListItem>
-        <Divider />
-        <ListItem>
-          <ListItemIcon sx={{ color: '#002680' }}>
-            <FaGlobe />
-          </ListItemIcon>
-          <ListItemText 
-            primary="Region"
-            secondary={country.population.toLocaleString()}
-            secondaryTypographyProps={{ color: '#757575' }}
-          />
-        </ListItem>
-        <Divider />
-        {country.capital && (
-          <>
-            <ListItem>
-              <ListItemIcon sx={{ color: '#002680' }}>
-                <FaCity />
-              </ListItemIcon>
-              <ListItemText 
-                primary="Capital"
-                secondary={country.capital.join(', ')}
-                secondaryTypographyProps={{ color: '#757575' }}
-              />
-            </ListItem>
-          </>
-        )}
+        <List>
+          <ListItem>
+            <ListItemIcon sx={{ color: textColor }}> 
+              <FaUsers />
+            </ListItemIcon>
+            <ListItemText
+              primary="Population"
+              secondary={country.population.toLocaleString()}
+              secondaryTypographyProps={{ color: secondaryTextColor }} 
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemIcon sx={{ color: textColor }}> 
+              <FaGlobe />
+            </ListItemIcon>
+            <ListItemText
+              primary="Region"
+              secondary={country.region} 
+              secondaryTypographyProps={{ color: secondaryTextColor }} 
+            />
+          </ListItem>
+          <Divider />
+          {country.capital && (
+            <>
+              <ListItem>
+                <ListItemIcon sx={{ color: textColor }}> 
+                  <FaCity />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Capital"
+                  secondary={country.capital.join(', ')}
+                  secondaryTypographyProps={{ color: secondaryTextColor }} 
+                />
+              </ListItem>
+            </>
+          )}
         </List>
       </CardContent>
     </Card>
