@@ -9,6 +9,7 @@ Este proyecto es una aplicación web que muestra información detallada sobre di
 - **Desempeño optimizado**: Construido con Vite para una carga rápida y eficiente.
 
 ##DEMO
+
 https://countries-dashboard-ecru.vercel.app/
 
 ## Tecnologías utilizadas
