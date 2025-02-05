@@ -5,12 +5,15 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { useTheme } from '@mui/material/styles'; // Importar useTheme
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PopulationChart = () => {
+  const theme = useTheme(); // Obtener el tema actual
+
   const data = {
-    labels: ['Asia', 'Africa', 'EuropE', 'Latin America and the Caribbean', 'North America', 'Oceania'],
+    labels: ['Asia', 'Africa', 'Europe', 'Latin America and the Caribbean', 'North America', 'Oceania'],
     datasets: [
       {
         label: 'Distribution of world population by continent in 2024',
@@ -41,10 +44,14 @@ const PopulationChart = () => {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: {
+          color: theme.palette.mode === 'dark' ? '#fff' : '#000', 
+        },
       },
       title: {
         display: true,
-        text: 'Distribución de la población mundial por continente en 2024',
+        text: 'Distribution of world population by continent in 2024',
+        color: theme.palette.mode === 'dark' ? '#fff' : '#000',
       },
     },
   };
