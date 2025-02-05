@@ -24,7 +24,7 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapCountry: React.FC<MapCountryProps> = ({ latlng }) => {
     return (
-        <MapContainer center={latlng} zoom={10} style={{ height: '45vh', width: '100%' }}>
+        <MapContainer center={latlng} zoom={5} style={{ height: '45vh', width: '100%' }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
