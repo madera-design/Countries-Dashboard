@@ -16,7 +16,7 @@ import {
   Stack,
   Button
 } from '@mui/material';
-import { ArrowUpNarrowWide, ArrowDownNarrowWide } from 'lucide-react';
+import { FaPersonArrowUpFromLine, FaPersonArrowDownToLine } from "react-icons/fa6";
 import { useCountriesStore } from '../store/useCountriesStore';
 import { CountryCard } from '../components/CountryCard';
 import ChartModal from '../components/ChartModal';
@@ -96,11 +96,11 @@ export const CountriesList: React.FC = () => {
           aria-label="population sort"
         >
           <ToggleButton value="asc" aria-label="sort ascending">
-            <ArrowUpNarrowWide size={20} />
+            <FaPersonArrowUpFromLine  size={20} />
             <Typography sx={{ ml: 1 }}>Mayor población</Typography>
           </ToggleButton>
           <ToggleButton value="desc" aria-label="sort descending">
-            <ArrowDownNarrowWide size={20} />
+            <FaPersonArrowDownToLine size={20} />
             <Typography sx={{ ml: 1 }}>Menor población</Typography>
           </ToggleButton>
         </ToggleButtonGroup>

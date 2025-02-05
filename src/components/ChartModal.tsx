@@ -1,6 +1,7 @@
 import React from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import PopulationChart from "./PopulationChart";
+import { IoMdClose } from "react-icons/io";
 
 interface ChartModalProps {
   isOpen: boolean;
@@ -10,17 +11,25 @@ interface ChartModalProps {
 const ChartModal: React.FC<ChartModalProps> = ({ isOpen, onClose }) => {
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ textAlign: "center", fontWeight: "bold" }}>
+      <DialogTitle sx={{ m: 0, p: 2, textAlign: "center", fontWeight: "bold" }}>
         Distribución de Población por Continente
       </DialogTitle>
+      <IconButton
+          aria-label="close"
+          onClick={onClose}
+          color="error"
+          sx={(theme) => ({
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: theme.palette.grey[500],
+          })}
+        >
+          <IoMdClose />
+        </IconButton>
       <DialogContent>
         <PopulationChart />
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="error" variant="contained" fullWidth>
-          Cerrar
-        </Button>
-      </DialogActions>
     </Dialog>
   );
 };

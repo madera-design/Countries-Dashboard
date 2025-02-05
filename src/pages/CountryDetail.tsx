@@ -13,8 +13,8 @@ import {
   ListItemText,
   Divider
 } from '@mui/material';
-import { ArrowLeft } from 'lucide-react';
 import { useCountriesStore } from '../store/useCountriesStore';
+import { FaArrowLeft } from "react-icons/fa6";
 
 export const CountryDetail: React.FC = () => {
   const { countryName } = useParams<{ countryName: string }>();
@@ -36,7 +36,7 @@ export const CountryDetail: React.FC = () => {
       <Box>
         <Typography variant="h5" color="error">País no encontrado</Typography>
         <Button 
-          startIcon={<ArrowLeft />}
+          startIcon={<FaArrowLeft/>}
           onClick={() => navigate('/')}
           sx={{ mt: 2 }}
         >
@@ -49,7 +49,7 @@ export const CountryDetail: React.FC = () => {
   return (
     <Box>
       <Button 
-        startIcon={<ArrowLeft />}
+        startIcon={<FaArrowLeft/>}
         onClick={() => navigate('/')}
         sx={{ mb: 4 }}
       >
