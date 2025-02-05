@@ -8,7 +8,7 @@ Este proyecto es una aplicación web que muestra información detallada sobre di
 - **Interfaz intuitiva**: Diseño limpio y responsive gracias a Tailwind CSS.
 - **Desempeño optimizado**: Construido con Vite para una carga rápida y eficiente.
 
-##DEMO
+## Demo
 
 https://countries-dashboard-ecru.vercel.app/
 
