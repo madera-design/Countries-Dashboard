@@ -98,11 +98,11 @@ export const CountriesList: React.FC = () => {
             aria-label="population sort"
           >
             <ToggleButton value="asc" aria-label="sort ascending">
-              <FaPersonArrowUpFromLine  size={20} />
+              <FaPersonArrowDownToLine size={20} />
               <Typography sx={{ ml: 1 }}>Population</Typography>
             </ToggleButton>
             <ToggleButton value="desc" aria-label="sort descending">
-              <FaPersonArrowDownToLine size={20} />
+              <FaPersonArrowUpFromLine size={20} />
               <Typography sx={{ ml: 1 }}>Population</Typography>
             </ToggleButton>
           </ToggleButtonGroup>

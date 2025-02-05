@@ -19,6 +19,7 @@ interface CountriesState {
   setCurrentPage: (page: number) => void;
   getPaginatedCountries: () => Country[];
   getTotalPages: () => number;
+  filterCountries: () => void;
 }
 
 export const useCountriesStore = create<CountriesState>((set, get) => ({
@@ -31,6 +32,34 @@ export const useCountriesStore = create<CountriesState>((set, get) => ({
   sortOrder: null,
   currentPage: 0,
   itemsPerPage: 15,
+  filterCountries: () => {
+    const { countries, searchTerm, selectedRegion, sortOrder } = get();
+    
+    let filtered = [...countries];
+
+    if (searchTerm) {
+      filtered = filtered.filter(country =>
+        country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (selectedRegion) {
+      filtered = filtered.filter(country =>
+        country.region.toLowerCase() === selectedRegion.toLowerCase()
+      );
+    }
+
+    if (sortOrder) {
+      filtered.sort((a, b) => {
+        if (sortOrder === 'asc') {
+          return a.population - b.population;
+        }
+        return b.population - a.population;
+      });
+    }
+
+    set({ filteredCountries: filtered });
+  },
 
   fetchCountries: async () => {
     set({ loading: true, error: null });
@@ -73,34 +102,5 @@ export const useCountriesStore = create<CountriesState>((set, get) => ({
   getTotalPages: () => {
     const { filteredCountries, itemsPerPage } = get();
     return Math.ceil(filteredCountries.length / itemsPerPage);
-  },
-
-  filterCountries: () => {
-    const { countries, searchTerm, selectedRegion, sortOrder } = get();
-    
-    let filtered = [...countries];
-
-    if (searchTerm) {
-      filtered = filtered.filter(country =>
-        country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    if (selectedRegion) {
-      filtered = filtered.filter(country =>
-        country.region.toLowerCase() === selectedRegion.toLowerCase()
-      );
-    }
-
-    if (sortOrder) {
-      filtered.sort((a, b) => {
-        if (sortOrder === 'asc') {
-          return a.population - b.population;
-        }
-        return b.population - a.population;
-      });
-    }
-
-    set({ filteredCountries: filtered });
   },
 }));
