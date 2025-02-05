@@ -64,7 +64,7 @@ export const CountriesList: React.FC = () => {
   const totalPages = getTotalPages();
 
   return (
-    <Container fixed>
+    <Container maxWidth="xl">
       <Box>
         <Box sx={{ mb: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
           <TextField
@@ -106,6 +106,7 @@ export const CountriesList: React.FC = () => {
               <Typography sx={{ ml: 1 }}>Population</Typography>
             </ToggleButton>
           </ToggleButtonGroup>
+          
           <Button
             variant="contained"
             color="primary"

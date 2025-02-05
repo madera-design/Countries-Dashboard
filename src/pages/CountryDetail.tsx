@@ -12,10 +12,13 @@ import {
   ListItem,
   ListItemText,
   Divider,
-  Container
+  Container,
+  ListItemIcon
 } from '@mui/material';
 import { useCountriesStore } from '../store/useCountriesStore';
-import { FaArrowLeft } from "react-icons/fa6";
+import { FaArrowLeft, FaCity, FaClock, FaGlobe, FaLanguage, FaUsers } from "react-icons/fa6";
+import MapCountry from '../components/MapCountry';
+import { FaMoneyBillAlt } from 'react-icons/fa';
 
 export const CountryDetail: React.FC = () => {
   const { countryName } = useParams<{ countryName: string }>();
@@ -38,113 +41,165 @@ export const CountryDetail: React.FC = () => {
         <Button 
           startIcon={<FaArrowLeft/>}
           onClick={() => navigate('/')}
-          sx={{ mt: 2 }}
+          sx={{ mt: 5 }}
         >
           Back to list
         </Button>
-        <Typography variant="h5" color="error">Country not found</Typography>
+        <Typography variant="h1" color="error">Country not found</Typography>
       </Box>
     );
   }
 
   return (
-    <Container fixed>
-      <Box>
-        <Button 
-          startIcon={<FaArrowLeft/>}
-          onClick={() => navigate('/')}
-          sx={{ mb: 4 }}
-        >
-          Back to list
-        </Button>
+<Container maxWidth="xl">
+  <Box>
+    <Button 
+      startIcon={<FaArrowLeft />}
+      onClick={() => navigate('/')}
+      sx={{ mb: 5 }}
+    >
+      Back to list
+    </Button>
 
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Card sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <CardMedia
-                component="img"
-                image={country.flags.svg}
-                alt={country.flags.alt || `Flag of ${country.name.common}`}
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain'
-                }}
-              />
-            </Card>
-          </Grid>
+    {/* Título y bandera alineados horizontalmente */}
+    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 4 }}>
+      <Typography variant="h4" sx={{ color: '#002680', fontWeight: 'bold' }}>
+        {country.name.official}
+      </Typography>
+      <Card 
+        sx={{ 
+          width: 'auto', // Ancho automático según el contenido
+          height: '80px', // Altura proporcional al texto
+          borderRadius: '8px',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+          overflow: 'hidden',
+        }}
+      >
+        <CardMedia
+          component="img"
+          image={country.flags.svg}
+          alt={country.flags.alt || `Flag of ${country.name.common}`}
+          sx={{
+            width: 'auto', // Ancho automático
+            height: '100%', // Altura completa del contenedor
+            objectFit: 'contain',
+          }}
+        />
+      </Card>
+    </Box>
 
-          <Grid item xs={12} md={6}>
-            <Typography variant="h4" gutterBottom>
-              {country.name.official}
-            </Typography>
+    <Grid container spacing={4}>
+      <Grid item xs={12} md={6}>
+        <List>
+          <ListItem>
+            <ListItemIcon sx={{ color: '#002680' }}>
+              <FaGlobe />
+            </ListItemIcon>
+            <ListItemText 
+              primary="Common Name"
+              secondary={country.name.common}
+              secondaryTypographyProps={{ color: '#757575' }}
+            />
+          </ListItem>
+          <Divider />
 
-            <List>
+          {country.capital && (
+            <>
               <ListItem>
+                <ListItemIcon sx={{ color: '#002680' }}>
+                  <FaCity />
+                </ListItemIcon>
                 <ListItemText 
-                  primary="Common Name"
-                  secondary={country.name.common}
+                  primary="Capital"
+                  secondary={country.capital.join(', ')}
+                  secondaryTypographyProps={{ color: '#757575' }}
                 />
               </ListItem>
               <Divider />
+            </>
+          )}
 
-              {country.capital && (
-                <>
-                  <ListItem>
-                    <ListItemText 
-                      primary="Capital"
-                      secondary={country.capital.join(', ')}
-                    />
-                  </ListItem>
-                  <Divider />
-                </>
-              )}
+          <ListItem>
+            <ListItemIcon sx={{ color: '#002680' }}>
+              <FaUsers />
+            </ListItemIcon>
+            <ListItemText 
+              primary="Population"
+              secondary={country.population.toLocaleString()}
+              secondaryTypographyProps={{ color: '#757575' }}
+            />
+          </ListItem>
+          <Divider />
 
+          {country.languages && (
+            <>
               <ListItem>
+                <ListItemIcon sx={{ color: '#002680' }}>
+                  <FaLanguage />
+                </ListItemIcon>
                 <ListItemText 
-                  primary="Population"
-                  secondary={country.population.toLocaleString()}
+                  primary="Languages"
+                  secondary={Object.values(country.languages).join(', ')}
+                  secondaryTypographyProps={{ color: '#757575' }}
                 />
               </ListItem>
               <Divider />
+            </>
+          )}
 
-              {country.languages && (
-                <>
-                  <ListItem>
-                    <ListItemText 
-                      primary="Languages"
-                      secondary={Object.values(country.languages).join(', ')}
-                    />
-                  </ListItem>
-                  <Divider />
-                </>
-              )}
-
-              {country.currencies && (
-                <>
-                  <ListItem>
-                    <ListItemText 
-                      primary="Currencies"
-                      secondary={Object.values(country.currencies)
-                        .map(currency => `${currency.name} (${currency.symbol})`)
-                        .join(', ')}
-                    />
-                  </ListItem>
-                  <Divider />
-                </>
-              )}
-
+          {country.currencies && (
+            <>
               <ListItem>
+                <ListItemIcon sx={{ color: '#002680' }}>
+                  <FaMoneyBillAlt />
+                </ListItemIcon>
                 <ListItemText 
-                  primary="Timezones"
-                  secondary={country.timezones.join(', ')}
+                  primary="Currencies"
+                  secondary={Object.values(country.currencies)
+                    .map(currency => `${currency.name} (${currency.symbol})`)
+                    .join(', ')}
+                  secondaryTypographyProps={{ color: '#757575' }}
                 />
               </ListItem>
-            </List>
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
+              <Divider />
+            </>
+          )}
 
+          <ListItem>
+            <ListItemIcon sx={{ color: '#002680' }}>
+              <FaClock />
+            </ListItemIcon>
+            <ListItemText 
+              primary="Timezones"
+              secondary={country.timezones.join(', ')}
+              secondaryTypographyProps={{ color: '#757575' }}
+            />
+          </ListItem>
+        </List>
+      </Grid>
+
+      <Grid item xs={12} md={6}>
+      <List>
+          <ListItem>
+            <Box
+              sx={{
+                width: '100%',
+                borderRadius: '16px',
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+                overflow: 'hidden',
+                mt: 2,
+              }}
+            >
+              <Typography variant="h5" sx={{ p: 2, color: '#002680', fontWeight: 'bold' }}>
+                Geographical area
+              </Typography>
+              <MapCountry latlng={country.latlng} />
+            </Box>
+          </ListItem>
+        </List>
+      </Grid>
+    </Grid>
+  </Box>
+</Container>
   );
 }
