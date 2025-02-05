@@ -31,7 +31,7 @@ const MapCountry: React.FC<MapCountryProps> = ({ latlng }) => {
             />
             <Marker position={latlng}>
                 <Popup>
-                    Ubicación del país.
+                    Country location.
                 </Popup>
             </Marker>
         </MapContainer>

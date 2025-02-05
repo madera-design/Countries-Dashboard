@@ -75,7 +75,7 @@ export const CountryDetail: React.FC = () => {
           <Card
             sx={{
               width: 'auto', // Ancho automático según el contenido
-              height: '80px', // Altura proporcional al texto
+              height: '100px', // Altura proporcional al texto
               borderRadius: '8px',
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
               overflow: 'hidden',
@@ -99,7 +99,7 @@ export const CountryDetail: React.FC = () => {
             <List>
               <ListItem>
                 <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
-                  <FaGlobe />
+                  <FaGlobe size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Common Name"
@@ -113,7 +113,7 @@ export const CountryDetail: React.FC = () => {
                 <>
                   <ListItem>
                     <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
-                      <FaCity />
+                      <FaCity size={20}/>
                     </ListItemIcon>
                     <ListItemText
                       primary="Capital"
@@ -127,7 +127,7 @@ export const CountryDetail: React.FC = () => {
 
               <ListItem>
                 <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
-                  <FaUsers />
+                  <FaUsers size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Population"
@@ -141,7 +141,7 @@ export const CountryDetail: React.FC = () => {
                 <>
                   <ListItem>
                     <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
-                      <FaLanguage />
+                      <FaLanguage size={20}/>
                     </ListItemIcon>
                     <ListItemText
                       primary="Languages"
@@ -157,7 +157,7 @@ export const CountryDetail: React.FC = () => {
                 <>
                   <ListItem>
                     <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
-                      <FaMoneyBillAlt />
+                      <FaMoneyBillAlt size={20}/>
                     </ListItemIcon>
                     <ListItemText
                       primary="Currencies"
@@ -173,7 +173,7 @@ export const CountryDetail: React.FC = () => {
 
               <ListItem>
                 <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
-                  <FaClock />
+                  <FaClock size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Timezones"
@@ -196,8 +196,8 @@ export const CountryDetail: React.FC = () => {
                     mt: 2,
                   }}
                 >
-                  <Typography variant="h5" sx={{ p: 2, color: textColor, fontWeight: 'bold' }}> {/* Color dinámico */}
-                    Geographical area
+                  <Typography variant="h5" component="div" sx={{ p: 2, color: textColor, fontWeight: 'bold', display: 'flex'}}>
+                    Geographical area 
                   </Typography>
                   <MapCountry latlng={country.latlng} />
                 </Box>

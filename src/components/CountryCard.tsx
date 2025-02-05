@@ -71,7 +71,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
         <List>
           <ListItem>
             <ListItemIcon sx={{ color: textColor }}> 
-              <FaUsers />
+              <FaUsers size={20}/>
             </ListItemIcon>
             <ListItemText
               primary="Population"
@@ -82,7 +82,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           <Divider />
           <ListItem>
             <ListItemIcon sx={{ color: textColor }}> 
-              <FaGlobe />
+              <FaGlobe size={20}/>
             </ListItemIcon>
             <ListItemText
               primary="Region"
@@ -95,7 +95,7 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
             <>
               <ListItem>
                 <ListItemIcon sx={{ color: textColor }}> 
-                  <FaCity />
+                  <FaCity size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Capital"
