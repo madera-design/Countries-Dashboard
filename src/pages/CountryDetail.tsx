@@ -34,13 +34,13 @@ export const CountryDetail: React.FC = () => {
   if (!country) {
     return (
       <Box>
-        <Typography variant="h5" color="error">Country not found</Typography>
+        <Typography variant="h5" color="error">País no encontrado</Typography>
         <Button 
           startIcon={<ArrowLeft />}
           onClick={() => navigate('/')}
           sx={{ mt: 2 }}
         >
-          Back to List
+          Regresar
         </Button>
       </Box>
     );
@@ -53,17 +53,21 @@ export const CountryDetail: React.FC = () => {
         onClick={() => navigate('/')}
         sx={{ mb: 4 }}
       >
-        Back to List
+        Regresar
       </Button>
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Card>
+          <Card sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <CardMedia
               component="img"
               image={country.flags.svg}
               alt={country.flags.alt || `Flag of ${country.name.common}`}
-              sx={{ width: '100%', height: 'auto' }}
+              sx={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain'
+              }}
             />
           </Card>
         </Grid>
@@ -76,7 +80,7 @@ export const CountryDetail: React.FC = () => {
           <List>
             <ListItem>
               <ListItemText 
-                primary="Common Name"
+                primary="Nombre"
                 secondary={country.name.common}
               />
             </ListItem>
@@ -96,7 +100,7 @@ export const CountryDetail: React.FC = () => {
 
             <ListItem>
               <ListItemText 
-                primary="Population"
+                primary="Población"
                 secondary={country.population.toLocaleString()}
               />
             </ListItem>
@@ -106,7 +110,7 @@ export const CountryDetail: React.FC = () => {
               <>
                 <ListItem>
                   <ListItemText 
-                    primary="Languages"
+                    primary="Idiomas"
                     secondary={Object.values(country.languages).join(', ')}
                   />
                 </ListItem>
@@ -118,7 +122,7 @@ export const CountryDetail: React.FC = () => {
               <>
                 <ListItem>
                   <ListItemText 
-                    primary="Currencies"
+                    primary="Monedas"
                     secondary={Object.values(country.currencies)
                       .map(currency => `${currency.name} (${currency.symbol})`)
                       .join(', ')}
@@ -130,13 +134,14 @@ export const CountryDetail: React.FC = () => {
 
             <ListItem>
               <ListItemText 
-                primary="Timezones"
+                primary="Zonas horarias"
                 secondary={country.timezones.join(', ')}
               />
             </ListItem>
           </List>
         </Grid>
       </Grid>
-    </Box>
+</Box>
+
   );
 }

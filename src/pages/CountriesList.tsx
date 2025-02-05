@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Grid, 
   TextField, 
@@ -13,13 +13,16 @@ import {
   ToggleButton,
   Typography,
   Pagination,
-  Stack
+  Stack,
+  Button
 } from '@mui/material';
 import { ArrowUpNarrowWide, ArrowDownNarrowWide } from 'lucide-react';
 import { useCountriesStore } from '../store/useCountriesStore';
 import { CountryCard } from '../components/CountryCard';
+import ChartModal from '../components/ChartModal';
 
 export const CountriesList: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { 
     loading, 
     error, 
@@ -63,7 +66,7 @@ export const CountriesList: React.FC = () => {
     <Box>
       <Box sx={{ mb: 4, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
         <TextField
-          label="Search countries"
+          label="Buscar país"
           variant="outlined"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -77,12 +80,12 @@ export const CountriesList: React.FC = () => {
             label="Region"
             onChange={(e) => setSelectedRegion(e.target.value)}
           >
-            <MenuItem value="">All Regions</MenuItem>
-            <MenuItem value="Africa">Africa</MenuItem>
-            <MenuItem value="Americas">Americas</MenuItem>
+            <MenuItem value="">Todas</MenuItem>
+            <MenuItem value="Africa">África</MenuItem>
+            <MenuItem value="Americas">América</MenuItem>
             <MenuItem value="Asia">Asia</MenuItem>
-            <MenuItem value="Europe">Europe</MenuItem>
-            <MenuItem value="Oceania">Oceania</MenuItem>
+            <MenuItem value="Europe">Europa</MenuItem>
+            <MenuItem value="Oceania">Oceanía</MenuItem>
           </Select>
         </FormControl>
 
@@ -94,15 +97,21 @@ export const CountriesList: React.FC = () => {
         >
           <ToggleButton value="asc" aria-label="sort ascending">
             <ArrowUpNarrowWide size={20} />
-            <Typography sx={{ ml: 1 }}>Population</Typography>
+            <Typography sx={{ ml: 1 }}>Mayor población</Typography>
           </ToggleButton>
           <ToggleButton value="desc" aria-label="sort descending">
             <ArrowDownNarrowWide size={20} />
-            <Typography sx={{ ml: 1 }}>Population</Typography>
+            <Typography sx={{ ml: 1 }}>Menor población</Typography>
           </ToggleButton>
         </ToggleButtonGroup>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Ver Gráfico de Población
+        </Button>
       </Box>
-
       <Grid container spacing={3}>
         {paginatedCountries.map((country) => (
           <Grid item key={country.name.common} xs={12} sm={6} md={4} lg={3}>
@@ -122,6 +131,7 @@ export const CountriesList: React.FC = () => {
           />
         </Stack>
       )}
+      <ChartModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </Box>
   );
 };

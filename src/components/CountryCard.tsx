@@ -45,10 +45,10 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
         </Typography>
         <Box sx={{ mt: 1 }}>
           <Typography variant="body2" color="text.secondary">
-            Population: {country.population.toLocaleString()}
+            Población: {country.population.toLocaleString()}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Region: {country.region}
+            Región: {country.region}
           </Typography>
           {country.capital && (
             <Typography variant="body2" color="text.secondary">
