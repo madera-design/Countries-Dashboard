@@ -14,7 +14,7 @@ import {
   Divider,
   Container,
   ListItemIcon,
-  useTheme, // Importar useTheme
+  useTheme,
 } from '@mui/material';
 import { useCountriesStore } from '../store/useCountriesStore';
 import { FaArrowLeft, FaCity, FaClock, FaGlobe, FaLanguage, FaUsers } from "react-icons/fa6";
@@ -25,11 +25,10 @@ export const CountryDetail: React.FC = () => {
   const { countryName } = useParams<{ countryName: string }>();
   const navigate = useNavigate();
   const { countries, loading } = useCountriesStore();
-  const theme = useTheme(); // Obtener el tema actual
+  const theme = useTheme();
 
   const country = countries.find(c => c.name.common === countryName);
 
-  // Determinar el color del texto basado en el modo (oscuro/claro)
   const textColor = theme.palette.mode === 'dark' ? '#ffffff' : '#002680';
   const secondaryTextColor = theme.palette.mode === 'dark' ? '#b0b0b0' : '#757575';
 
@@ -67,15 +66,14 @@ export const CountryDetail: React.FC = () => {
           Back to list
         </Button>
 
-        {/* Título y bandera alineados horizontalmente */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 4 }}>
-          <Typography variant="h4" sx={{ color: textColor, fontWeight: 'bold' }}> {/* Color dinámico */}
+          <Typography variant="h4" sx={{ color: textColor, fontWeight: 'bold' }}> 
             {country.name.official}
           </Typography>
           <Card
             sx={{
-              width: 'auto', // Ancho automático según el contenido
-              height: '100px', // Altura proporcional al texto
+              width: 'auto', 
+              height: '100px', 
               borderRadius: '8px',
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
               overflow: 'hidden',
@@ -86,8 +84,8 @@ export const CountryDetail: React.FC = () => {
               image={country.flags.svg}
               alt={country.flags.alt || `Flag of ${country.name.common}`}
               sx={{
-                width: 'auto', // Ancho automático
-                height: '100%', // Altura completa del contenedor
+                width: 'auto', 
+                height: '100%', 
                 objectFit: 'contain',
               }}
             />
@@ -98,13 +96,13 @@ export const CountryDetail: React.FC = () => {
           <Grid item xs={12} md={6}>
             <List>
               <ListItem>
-                <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
+                <ListItemIcon sx={{ color: textColor }}> 
                   <FaGlobe size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Common Name"
                   secondary={country.name.common}
-                  secondaryTypographyProps={{ color: secondaryTextColor }} // Color dinámico
+                  secondaryTypographyProps={{ color: secondaryTextColor }} 
                 />
               </ListItem>
               <Divider />
@@ -112,13 +110,13 @@ export const CountryDetail: React.FC = () => {
               {country.capital && (
                 <>
                   <ListItem>
-                    <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
+                    <ListItemIcon sx={{ color: textColor }}> 
                       <FaCity size={20}/>
                     </ListItemIcon>
                     <ListItemText
                       primary="Capital"
                       secondary={country.capital.join(', ')}
-                      secondaryTypographyProps={{ color: secondaryTextColor }} // Color dinámico
+                      secondaryTypographyProps={{ color: secondaryTextColor }} 
                     />
                   </ListItem>
                   <Divider />
@@ -126,13 +124,13 @@ export const CountryDetail: React.FC = () => {
               )}
 
               <ListItem>
-                <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
+                <ListItemIcon sx={{ color: textColor }}> 
                   <FaUsers size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Population"
                   secondary={country.population.toLocaleString()}
-                  secondaryTypographyProps={{ color: secondaryTextColor }} // Color dinámico
+                  secondaryTypographyProps={{ color: secondaryTextColor }} 
                 />
               </ListItem>
               <Divider />
@@ -140,13 +138,13 @@ export const CountryDetail: React.FC = () => {
               {country.languages && (
                 <>
                   <ListItem>
-                    <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
+                    <ListItemIcon sx={{ color: textColor }}> 
                       <FaLanguage size={20}/>
                     </ListItemIcon>
                     <ListItemText
                       primary="Languages"
                       secondary={Object.values(country.languages).join(', ')}
-                      secondaryTypographyProps={{ color: secondaryTextColor }} // Color dinámico
+                      secondaryTypographyProps={{ color: secondaryTextColor }} 
                     />
                   </ListItem>
                   <Divider />
@@ -156,7 +154,7 @@ export const CountryDetail: React.FC = () => {
               {country.currencies && (
                 <>
                   <ListItem>
-                    <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
+                    <ListItemIcon sx={{ color: textColor }}> 
                       <FaMoneyBillAlt size={20}/>
                     </ListItemIcon>
                     <ListItemText
@@ -164,7 +162,7 @@ export const CountryDetail: React.FC = () => {
                       secondary={Object.values(country.currencies)
                         .map(currency => `${currency.name} (${currency.symbol})`)
                         .join(', ')}
-                      secondaryTypographyProps={{ color: secondaryTextColor }} // Color dinámico
+                      secondaryTypographyProps={{ color: secondaryTextColor }} 
                     />
                   </ListItem>
                   <Divider />
@@ -172,13 +170,13 @@ export const CountryDetail: React.FC = () => {
               )}
 
               <ListItem>
-                <ListItemIcon sx={{ color: textColor }}> {/* Color dinámico */}
+                <ListItemIcon sx={{ color: textColor }}> 
                   <FaClock size={20}/>
                 </ListItemIcon>
                 <ListItemText
                   primary="Timezones"
                   secondary={country.timezones.join(', ')}
-                  secondaryTypographyProps={{ color: secondaryTextColor }} // Color dinámico
+                  secondaryTypographyProps={{ color: secondaryTextColor }} 
                 />
               </ListItem>
             </List>
@@ -199,7 +197,9 @@ export const CountryDetail: React.FC = () => {
                   <Typography variant="h5" component="div" sx={{ p: 2, color: textColor, fontWeight: 'bold', display: 'flex'}}>
                     Geographical area 
                   </Typography>
-                  <MapCountry latlng={country.latlng} />
+                  {country.latlng && (
+                    <MapCountry latlng={[parseFloat(country.latlng[0]), parseFloat(country.latlng[1])]} />
+                  )}
                 </Box>
               </ListItem>
             </List>

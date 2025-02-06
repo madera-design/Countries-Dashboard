@@ -45,7 +45,7 @@ export const CountriesList: React.FC = () => {
   }, [fetchCountries]);
 
   const handlePageChange = (_: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page - 1); // Convert from 1-based to 0-based indexing
+    setCurrentPage(page - 1); 
   };
 
   if (loading) {

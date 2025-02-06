@@ -25,7 +25,6 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   const theme = useTheme();
 
   const textColor = theme.palette.mode === 'dark' ? '#ffffff' : '#002680';
-  const secondaryTextColor = theme.palette.mode === 'dark' ? '#b0b0b0' : '#757575';
 
   return (
     <Card
@@ -36,18 +35,17 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: theme.palette.background.paper,
-        position: 'relative', // Necesario para posicionar el Box de detalles
+        position: 'relative', 
         '&:hover': {
           transform: 'scale(1.02)',
           transition: 'transform 0.2s ease-in-out',
-          '& .details-overlay': { // Selecciona el Box de detalles
-            opacity: 1, // Mostrar el Box
-            visibility: 'visible', // Hacerlo visible
+          '& .details-overlay': {
+            opacity: 1, 
+            visibility: 'visible',
           },
         },
       }}
     >
-      {/* Imagen de la bandera */}
       <Box sx={{ position: 'relative', paddingTop: '56.25%' /* 16:9 aspect ratio */ }}>
         <CardMedia
           component="img"
@@ -63,8 +61,6 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           }}
         />
       </Box>
-
-      {/* Nombre del país */}
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography
           gutterBottom
@@ -76,24 +72,22 @@ export const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
           {country.name.common}
         </Typography>
       </CardContent>
-
-      {/* Lista de detalles (superpuesta) */}
       <Box
-        className="details-overlay" // Clase para seleccionar en el hover
+        className="details-overlay" 
         sx={{
           position: 'absolute',
           top: 0,
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)', // Fondo oscuro semitransparente
-          opacity: 0, // Ocultar inicialmente
-          visibility: 'hidden', // Ocultar inicialmente
+          backgroundColor: 'rgba(0, 0, 0, 0.7)', 
+          opacity: 0,
+          visibility: 'hidden', 
           transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          zIndex: 2, // Asegurar que esté por encima de la imagen y el texto
+          zIndex: 2,
         }}
       >
         <List sx={{ color: '#fff', width: '80%' }}>

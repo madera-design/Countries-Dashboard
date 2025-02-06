@@ -7,7 +7,7 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 interface MapCountryProps {
-    latlng: [string, string]; 
+    latlng: [number, number]; 
 }
 
 
@@ -24,6 +24,7 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapCountry: React.FC<MapCountryProps> = ({ latlng }) => {
     return (
+        
         <MapContainer center={latlng} zoom={5} style={{ height: '45vh', width: '100%' }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -19,5 +19,5 @@ export interface Country {
     };
   };
   timezones: string[];
-  latlng?:  [string, string];
+  latlng?:  [string , string];
 }

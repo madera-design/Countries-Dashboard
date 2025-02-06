@@ -5,12 +5,12 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useTheme } from '@mui/material/styles'; // Importar useTheme
+import { useTheme } from '@mui/material/styles';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PopulationChart = () => {
-  const theme = useTheme(); // Obtener el tema actual
+  const theme = useTheme();
 
   const data = {
     labels: ['Asia', 'Africa', 'Europe', 'Latin America and the Caribbean', 'North America', 'Oceania'],
